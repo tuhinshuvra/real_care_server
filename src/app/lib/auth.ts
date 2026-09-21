@@ -2,6 +2,8 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { Role, UserStatus } from "../../generated/prisma/enums";
+import ms, { StringValue } from "ms";
+import { envVars } from "../config/env";
 
 export const auth = betterAuth({
     database: prismaAdapter(prisma, {
@@ -40,8 +42,17 @@ export const auth = betterAuth({
         }
     },
 
-    trustedOrigins: [process.env.BETTER_AUTH_URL || "http://localhost:5000"],
-    advanced: {
-        disableCSRFCheck: true,
-    }
+    session: {
+        expiresIn: 60 * 60 * 60 * 24,
+        updateAge: 60 * 60 * 60 * 24,
+        cookieCache: {
+            enabled: true,
+            maxAge: 60 * 60 * 60 * 24
+        },
+    },
+
+    // trustedOrigins: [process.env.BETTER_AUTH_URL || "http://localhost:5000"],
+    // advanced: {
+    //     disableCSRFCheck: true,
+    // }
 });

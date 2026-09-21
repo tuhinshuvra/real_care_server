@@ -33,7 +33,7 @@ const deleteOneSpeciality = async (id: string) => {
 }
 
 const findOneSpeciality = async (id: string) => {
-    const speciality = await prisma.speciality.findFirstOrThrow({
+    const speciality = await prisma.speciality.findUnique({
         where: {
             id
         }
