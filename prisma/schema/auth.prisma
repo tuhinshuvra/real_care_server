@@ -15,6 +15,7 @@ model User {
   doctor             Doctor?
   accounts           Account[]
   sessions           Session[]
+  admins             Admin[]
 
   @@map("user")
 }

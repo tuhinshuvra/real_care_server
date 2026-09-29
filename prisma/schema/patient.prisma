@@ -1,16 +1,21 @@
 model Patient {
-    id            String    @id @default(uuid(7))
-    name          String
-    email         String    @unique
-    profilePhoto  String?
-    contactNumber String?
-    address       String?
-    isDeleted     Boolean   @default(false)
-    deletedAt     DateTime?
-    createdAt     DateTime  @default(now())
-    updatedAt     DateTime  @updatedAt
-    userId        String    @unique
-    user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id                String             @id @default(uuid(7))
+    name              String
+    email             String             @unique
+    profilePhoto      String?
+    contactNumber     String?
+    address           String?
+    isDeleted         Boolean            @default(false)
+    deletedAt         DateTime?
+    createdAt         DateTime           @default(now())
+    updatedAt         DateTime           @updatedAt
+    userId            String             @unique
+    user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+    reviews           Review[]
+    appointments      Appointment[]
+    medicalReports    MedicalReport[]
+    patientHealthData PatientHealthData?
+    prescriptions     Prescription[]
 
     @@index([email], name: "idx_patient_email")
     @@index([isDeleted], name: "idx_patient_is_deleted")
