@@ -1,15 +1,15 @@
 import { prisma } from "../../lib/prisma"
-import { Speciality } from "../../../generated/prisma/client"
+import { Specialty } from "../../../generated/prisma/client"
 
-const createSpeciality = async (payload: Speciality): Promise<Speciality> => {
-    const speciality = await prisma.speciality.create({
+const createSpeciality = async (payload: Specialty): Promise<Specialty> => {
+    const speciality = await prisma.specialty.create({
         data: payload
     })
     return speciality
 }
 
-const getAllSpeciality = async (): Promise<Speciality[]> => {
-    const specialities = await prisma.speciality.findMany();
+const getAllSpeciality = async (): Promise<Specialty[]> => {
+    const specialities = await prisma.specialty.findMany();
 
     if (!specialities) {
         throw new Error("No Speciality found")
@@ -19,7 +19,7 @@ const getAllSpeciality = async (): Promise<Speciality[]> => {
 }
 
 const deleteOneSpeciality = async (id: string) => {
-    const speciality = await prisma.speciality.delete({
+    const speciality = await prisma.specialty.delete({
         where: {
             id
         }
@@ -33,7 +33,7 @@ const deleteOneSpeciality = async (id: string) => {
 }
 
 const findOneSpeciality = async (id: string) => {
-    const speciality = await prisma.speciality.findUnique({
+    const speciality = await prisma.specialty.findUnique({
         where: {
             id
         }
@@ -45,8 +45,8 @@ const findOneSpeciality = async (id: string) => {
 
     return speciality
 }
-const updateOneSpeciality = async (id: string, payload: Speciality) => {
-    const speciality = await prisma.speciality.update({
+const updateOneSpeciality = async (id: string, payload: Specialty) => {
+    const speciality = await prisma.specialty.update({
         where: {
             id,
         },

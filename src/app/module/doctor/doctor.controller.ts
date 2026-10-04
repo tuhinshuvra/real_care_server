@@ -3,15 +3,19 @@ import { catchAsync } from "../../shared/catchAsync";
 import { sendResponse } from "../../shared/sendResponse";
 import { doctorServices } from "./doctor.service";
 import { Request, Response } from "express"
+import { IQueryParams } from "../../interfaces/query.interface";
 
 const getAllDoctors = catchAsync(
     async (req: Request, res: Response) => {
-        const result = await doctorServices.getAllDoctors();
+        const query = req.query;
+        const result = await doctorServices.getAllDoctors(query as IQueryParams);
+
         sendResponse(res, {
             httpStatusCode: status.OK,
             success: true,
             message: "Doctors retrieved successfully",
-            data: result
+            data: result.data,
+            meta: result.meta,
         })
     }
 )
@@ -20,6 +24,7 @@ const getDoctorById = catchAsync(
     async (req: Request, res: Response) => {
         const { id } = req.params;
         const result = await doctorServices.getDoctorById(id as string);
+
         sendResponse(res, {
             httpStatusCode: status.OK,
             success: true,
@@ -35,6 +40,7 @@ const updateDoctorById = catchAsync(
         const payload = req.body;
 
         const result = await doctorServices.updateDoctorById(id as string, payload);
+
         sendResponse(res, {
             httpStatusCode: status.OK,
             success: true,
@@ -48,6 +54,7 @@ const deleteDoctor = catchAsync(
     async (req: Request, res: Response) => {
         const { id } = req.params;
         const result = await doctorServices.deleteDoctor(id as string);
+
         sendResponse(res, {
             httpStatusCode: status.OK,
             success: true,

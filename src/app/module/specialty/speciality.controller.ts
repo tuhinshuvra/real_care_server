@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Speciality } from "../../../generated/prisma/client"
+import { Specialty } from "../../../generated/prisma/client"
 import { Request, Response } from "express"
 import { specialityService } from "./speciality.service";
 import { catchAsync } from "../../shared/catchAsync";
@@ -8,7 +8,13 @@ import status from "http-status";
 
 const createSpeciality = catchAsync(
     async (req: Request, res: Response) => {
-        const payload: Speciality = req.body;
+        console.log("Req.body : ", req.body);
+        console.log("Req.file : ", req.file);
+
+        const payload = {
+            ...req.body,
+            icon: req.file?.path
+        };
         const result = await specialityService.createSpeciality(payload);
         sendResponse(res, {
             httpStatusCode: status.CREATED,
@@ -62,7 +68,7 @@ const updateOneSpeciality = catchAsync(
     async (req: Request, res: Response) => {
 
         const { id } = req.params;
-        const payload: Speciality = req.body;
+        const payload: Specialty = req.body;
         const result = await specialityService.updateOneSpeciality(id as string, payload);
         sendResponse(res, {
             httpStatusCode: status.OK,
