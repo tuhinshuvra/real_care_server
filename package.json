@@ -15,6 +15,7 @@
     "studio": "prisma studio",
     "push": "prisma db push",
     "pull": "prisma db pull",
+    "stripe:webhook": "stripe listen --forward-to localhost:5000/webhook --all-snapshot",
     "lint": "eslint src/**/*.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,6 +27,7 @@
     "cloudinary": "^1.41.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
+    "date-fns": "^4.4.0",
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
@@ -33,9 +35,12 @@
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.4.0",
     "multer-storage-cloudinary": "^4.0.0",
+    "node-cron": "^4.6.0",
     "nodemailer": "^10.0.10",
     "pg": "^8.23.0",
     "qs": "^6.16.0",
+    "stripe": "^23.0.0",
+    "uuid": "^14.0.3",
     "zod": "^4.6.5"
   },
   "devDependencies": {

@@ -5,7 +5,6 @@ import { Role, UserStatus } from "../../generated/prisma/enums";
 import { bearer, emailOTP } from "better-auth/plugins";
 import { sendEmail } from "../utils/email";
 import { envVars } from "../config/env";
-import { env } from "process";
 
 export const auth = betterAuth({
     baseURL: envVars.BETTER_AUTH_URL,
@@ -89,6 +88,17 @@ export const auth = betterAuth({
                             email
                         }
                     })
+
+                    if (!user) {
+                        console.error(`User with email ${email} not found. Cannot send verification OTP.`);
+                        return;
+                    }
+
+                    if (user && user.role === Role.SUPER_ADMIN) {
+                        console.log(`User with email ${email} is a super admin. Skipping sending verification OTP.`);
+                        return;
+                    }
+
                     if (user && !user.emailVerified) {
                         sendEmail({
                             to: email,
