@@ -83,7 +83,7 @@ const bookAppointment = async (payload: IBookAppointmentPayload, user: IRequestU
                     price_data: {
                         currency: "bdt",
                         product_data: {
-                            name: `Appointment with Dr. ${doctorData.name}`,
+                            name: `Appointment with ${doctorData.name}`,
                         },
                         unit_amount: doctorData.appointmentFee * 100,
                     },
@@ -364,7 +364,7 @@ const initiatePayment = async (appointmentId: string, user: IRequestUser) => {
                 price_data: {
                     currency: "bdt",
                     product_data: {
-                        name: `Appointment with Dr. ${appointmentData.doctor.name}`,
+                        name: `Appointment with ${appointmentData.doctor.name}`,
                     },
                     unit_amount: appointmentData.doctor.appointmentFee * 100,
                 },

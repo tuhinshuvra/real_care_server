@@ -23,7 +23,7 @@ router.get('/:doctorId/schedule/:scheduleId',
 
 router.patch('/update-my-doctor-schedule',
     checkAuth(Role.DOCTOR),
-    doctorScheduleControllers.updateMyDoctorScheduleById);
+    doctorScheduleControllers.updateMyDoctorSchedule);
 
 router.patch('/delete-my-doctor-schedule/:id',
     checkAuth(Role.DOCTOR),

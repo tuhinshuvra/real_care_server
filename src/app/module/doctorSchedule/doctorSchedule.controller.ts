@@ -1,9 +1,9 @@
 import status from "http-status";
 import { catchAsync } from "../../shared/catchAsync";
 import { sendResponse } from "../../shared/sendResponse";
-import { doctorScheduleServices } from "./doctorSchedule.service";
 import { Request, Response } from "express"
 import { IQueryParams } from "../../interfaces/query.interface";
+import { doctorScheduleServices } from "./doctorSchedule.service";
 
 const createMyDoctorSchedule = catchAsync(
     async (req: Request, res: Response) => {
@@ -50,7 +50,7 @@ const getAllDoctorSchedules = catchAsync(
 const getDoctorSheduleById = catchAsync(async (req: Request, res: Response) => {
     const doctorId = req.params.doctorId;
     const scheduleId = req.params.scheduleId;
-    const result = await doctorScheduleServices.getDoctorSheduleById(doctorId as string, scheduleId as string);
+    const result = await doctorScheduleServices.getDoctorScheduleById(doctorId as string, scheduleId as string);
 
     sendResponse(res, {
         httpStatusCode: status.OK,
@@ -60,12 +60,12 @@ const getDoctorSheduleById = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
-const updateMyDoctorScheduleById = catchAsync(
+const updateMyDoctorSchedule = catchAsync(
     async (req: Request, res: Response) => {
         const payload = req.body;
         const user = req.user;
 
-        const result = await doctorScheduleServices.updateMyDoctorScheduleById(user, payload);
+        const result = await doctorScheduleServices.updateMyDoctorSchedule(user, payload);
 
         sendResponse(res, {
             httpStatusCode: status.OK,
@@ -93,6 +93,6 @@ export const doctorScheduleControllers = {
     getMyDoctorSchedules,
     getAllDoctorSchedules,
     getDoctorSheduleById,
-    updateMyDoctorScheduleById,
+    updateMyDoctorSchedule,
     deleteMyDoctorSchedule
 }
