@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import express, { Application, Request, Response } from 'express';
 import { indexRoutes } from './app/routes';
-import { globalErrorHandlar } from './app/middleware/globalErrorHandler';
+import { globalErrorHandler } from './app/middleware/globalErrorHandler';
 import { notFound } from './app/middleware/notFound';
 import cookieParser from 'cookie-parser';
 import { toNodeHandler } from 'better-auth/node';
@@ -57,7 +57,7 @@ app.get('/', async (req: Request, res: Response) => {
     res.json({ message: 'Hari OM, Welcome to HealthCare Backend API' });
 });
 
-app.use(globalErrorHandlar);
+app.use(globalErrorHandler);
 app.use(notFound);
 
 // app.use((req: Request, res: Response, next: NextFunction) => {
